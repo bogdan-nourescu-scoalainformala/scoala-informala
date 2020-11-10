@@ -1,0 +1,69 @@
+/*selector{
+	prop1:val;
+	prop2:val2;
+}*/
+body{
+	padding:0;
+	margin:0;
+	font-size:20px;
+}
+
+
+h1 {
+	background-color: aqua;
+	color: darkblue;
+	width: 100%;
+	height: 200px;
+	display: inline-block;
+	padding: 10px;
+	box-sizing: border-box;
+	border: 1px solid red;
+}
+
+.highlight {
+	font-size: 20px;
+	line-height:40px;
+	font-weight: bold;
+}
+.darkcolor{
+	background-color:black;
+	color:white;
+}
+#nav-menu{
+	background-color:green;
+}
+.nav-menu-item{
+	display: inline-block;
+	width: 100px;
+	border: 1px inset orange;
+	border-width: 2px;
+	border-color: #e54c21;
+	border-color: rgb(0-255,0-255,0-255);/*red green blue*/
+	256 = 8biti (00110011) (baza 2: 0, 1)
+	baza 10 (0..9)
+	baza 16 (0..9, ABCDEF)
+	1 cifra in baza 16 este reprezentata pe 4 biti 
+	hsl(54deg 45% 41%)
+	
+	border-style: dotted;
+	border-radius: 16px;
+	padding: 5px;
+	padding: 7px 8px;
+	padding: 3px 4px 5px 6px;
+	padding-top: 5px;
+	padding-right: 7px;
+	padding-left: 7px;
+	padding-bottom: 7px;
+	margin: 2px;
+	
+	margin: 2pt;
+	margin: 2in;
+	margin: 2cm;
+	margin: 2VW;/*viewport width*/
+	margin: 2VH;/*viewport height*/
+	
+	font-size: 1em;
+	font-size: 0.8em;
+	
+	font-size: 1.2em;/*1.2*16 = 19.2px*/
+}
