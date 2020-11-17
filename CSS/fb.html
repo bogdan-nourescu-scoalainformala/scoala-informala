@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>FB Login</title>
+	<style>
+		body{
+			margin:0;
+			padding:0;
+		}
+		#topBar{
+			background-color:#3b5998;
+			height:90px;
+		}
+		.pageContent{
+			max-width:1100px;
+			margin:0 auto;
+			display:flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+			height: 100%;
+		}
+		.logo{
+			font-size:40px;
+			font-weight:bold;
+			color:white;
+			
+		}
+		.loginContainer{
+			
+			
+		}
+		.loginForm{
+			display:grid;
+			grid-template-columns: 180px 180px 80px;
+			grid-template-rows: 1fr 1fr 1fr;
+			column-gap: 10px;
+			row-gap: 3px;
+		}
+		.loginForm label{
+			color:white;
+		}
+		.forgotAccountBtn{
+			color:lightgrey;
+		}
+		.loginBtn{
+			border:1px solid #17223b;
+			background-color: #476bb6;
+			color:white;
+			padding: 3px 0;
+		}
+		#main{
+			background: linear-gradient(0deg, #98b0e2, #d9e5ff);
+		}
+		#main .pageContent{
+			align-items: stretch;
+		}
+		.leftSide{
+			flex:6;
+		}
+		.rightSide{
+			flex:5;
+			display:flex;
+			flex-direction:column;
+		}
+		.rightSide input[type="text"]{
+			border-radius:7px;
+			padding:5px;
+		}
+		.rightSide > *{
+			margin-bottom:5px;
+		}
+	</style>
+</head>
+<body>
+	<header id="topBar">
+		<div class="pageContent">
+			<div class="logo">facebook</div>
+			<div class="loginContainer">
+				<form class="loginForm">
+					<label for="emailOrPhone">Email or Phone</label>
+					<label for="password">Password</label>
+					<span></span>
+					<input id="emailOrPhone" type="text" />
+					<input id="password" type="password" />
+					<input type="submit" class="loginBtn" value="Log In"/>
+					<span></span>
+					<a href="/forgot account" class="forgotAccountBtn">Forgotten account?</a>
+					<span></span>
+				</form>
+			</div>
+		</div>
+	</header>
+	<section id="main">
+		<div class="pageContent">
+			<div class="leftSide">
+				<h1 style="margin-top:40px;">
+					Faceboox xadasda asd a sda ds asd a sd asda sd as
+				</h1>
+				<img src="https://www.pbinfo.ro/resurse/9dc152/articole/grafuri/graf-neorientat-3.png">
+			</div>
+			<div class="rightSide">
+				<h1>Create an account</h1>
+				<h3>It's free and always will be</h3>
+				<div style="display:flex;">
+					<input type="text" placeholder="First Name" style="flex:1; margin-right:10px;"/>
+					<input type="text" placeholder="Last Name" style="flex:1;"/>
+				</div>
+				<input type="text" />
+				<input type="text" />
+				<div>Birthday</div>
+				<div>
+					<select>
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+						<option>4</option>
+						<option>5</option>
+						<option>6</option>
+					</select>
+					<select>
+						<option>Jan</option>
+						<option>Feb</option>
+						<option>Mar</option>
+						<option>Apr</option>
+						<option>May</option>
+						<option>Jun</option>
+					</select>
+					<select>
+						<option>1900</option>
+						<option>1901</option>
+						<option>1902</option>
+						<option>1903</option>
+						<option>1904</option>
+						<option>2000</option>
+					</select>
+					<a hraf="" >adasdasdasda asdadsasd</a>
+				</div>
+				<div>
+					<label>
+						<input type="radio" name="gender" value="male" />
+						Male
+					</label>
+					<label>
+						<input type="radio" name="gender" value="female" />
+						Female
+					</label>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

@@ -19,6 +19,56 @@ h1 {
 	box-sizing: border-box;
 	border: 1px solid red;
 }
+.font8, .font10, .font15{
+	box-sizing:border-box;
+}
+.font8{
+	font-size:8px;
+}
+.font10{
+	font-size:10px;
+}
+.font15{
+	font-size:15px;
+}
+
+.highlight.button{
+	/*ambele clase in acelasi timp; nu conteaza ordinea, CU SI*/
+}
+
+.highlight, .button{
+	/*elementele care au ori clasa highlight ori clasa button CU SAU*/
+}
+
+.button.darkcolor{
+	/*ambele clase in acelasi timp; nu conteaza ordinea*/
+}
+
+.parinte .copil{
+	/*ce este pana la spatiu e un selector pentru parinte
+		ce este dupa spatiu este un selector pentru copil/copii
+	*/
+}
+.parinte div{
+	
+}
+#nav-menu .nav-menu-item .icon{
+	/*parinte-parinte-copil direct+indirect*/
+}
+
+#nav-menu>.nav-menu-item>.icon{
+	/*parinte-parinte-copil direct*/
+}
+
+#nav-menu .nav-menu-item:hover{
+	background-color: #015e01;
+    color: white;
+}
+
+a, a:link, a:visited, a:active {
+	color:blue;
+}
+
 
 .highlight {
 	font-size: 20px;
@@ -29,6 +79,8 @@ h1 {
 	background-color:black;
 	color:white;
 }
+
+
 #nav-menu{
 	background-color:green;
 }
