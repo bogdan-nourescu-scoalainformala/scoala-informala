@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>FB Login</title>
+	<link rel="stylesheet" href="grid.css">
 	<style>
 		body{
 			margin:0;
@@ -53,13 +54,12 @@
 			background: linear-gradient(0deg, #98b0e2, #d9e5ff);
 		}
 		#main .pageContent{
-			align-items: stretch;
+			flex-wrap:wrap;
 		}
 		.leftSide{
-			flex:6;
+			
 		}
 		.rightSide{
-			flex:5;
 			display:flex;
 			flex-direction:column;
 		}
@@ -93,13 +93,13 @@
 	</header>
 	<section id="main">
 		<div class="pageContent">
-			<div class="leftSide">
+			<div class="leftSide col-xs-12 col-lg-7">
 				<h1 style="margin-top:40px;">
 					Faceboox xadasda asd a sda ds asd a sd asda sd as
 				</h1>
 				<img src="https://www.pbinfo.ro/resurse/9dc152/articole/grafuri/graf-neorientat-3.png">
 			</div>
-			<div class="rightSide">
+			<div class="rightSide col-xs-12 col-lg-5">
 				<h1>Create an account</h1>
 				<h3>It's free and always will be</h3>
 				<div style="display:flex;">
