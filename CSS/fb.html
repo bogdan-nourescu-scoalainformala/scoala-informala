@@ -2,6 +2,8 @@
 <html>
 <head>
 	<title>FB Login</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
 	<link rel="stylesheet" href="grid.css">
 	<style>
 		body{
@@ -10,7 +12,7 @@
 		}
 		#topBar{
 			background-color:#3b5998;
-			height:90px;
+			min-height: 90px;
 		}
 		.pageContent{
 			max-width:1100px;
@@ -20,6 +22,7 @@
 			justify-content: space-between;
 			align-items: center;
 			height: 100%;
+			flex-wrap:wrap;
 		}
 		.logo{
 			font-size:40px;
@@ -27,16 +30,28 @@
 			color:white;
 			
 		}
+		@media (max-width: 768px) {
+			.logo{
+				text-align:center;
+			}
+		}
 		.loginContainer{
 			
 			
 		}
 		.loginForm{
-			display:grid;
-			grid-template-columns: 180px 180px 80px;
+			display: grid;
+			grid-template-columns: 38% 38% 18%;
 			grid-template-rows: 1fr 1fr 1fr;
-			column-gap: 10px;
+			column-gap: 3%;
 			row-gap: 3px;
+			grid-auto-flow: column;
+		}
+		@media (max-width: 768px) {
+			.loginForm{
+				grid-template-columns: 100%;
+				grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+			}
 		}
 		.loginForm label{
 			color:white;
@@ -75,13 +90,13 @@
 <body>
 	<header id="topBar">
 		<div class="pageContent">
-			<div class="logo">facebook</div>
-			<div class="loginContainer">
+			<div class="logo col-xs-12 col-md-3">facebook</div>
+			<div class="loginContainer col-xs-12 col-md-6">
 				<form class="loginForm">
 					<label for="emailOrPhone">Email or Phone</label>
-					<label for="password">Password</label>
-					<span></span>
 					<input id="emailOrPhone" type="text" />
+					<span></span>
+					<label for="password">Password</label>
 					<input id="password" type="password" />
 					<input type="submit" class="loginBtn" value="Log In"/>
 					<span></span>
@@ -97,14 +112,14 @@
 				<h1 style="margin-top:40px;">
 					Faceboox xadasda asd a sda ds asd a sd asda sd as
 				</h1>
-				<img src="https://www.pbinfo.ro/resurse/9dc152/articole/grafuri/graf-neorientat-3.png">
+				<img style="max-width:100%" src="https://www.pbinfo.ro/resurse/9dc152/articole/grafuri/graf-neorientat-3.png">
 			</div>
 			<div class="rightSide col-xs-12 col-lg-5">
 				<h1>Create an account</h1>
 				<h3>It's free and always will be</h3>
-				<div style="display:flex;">
-					<input type="text" placeholder="First Name" style="flex:1; margin-right:10px;"/>
-					<input type="text" placeholder="Last Name" style="flex:1;"/>
+				<div style="display:flex; flex-wrap:wrap; justify-content: space-between;">
+					<input type="text" placeholder="First Name" class="col-xs-12 col-md-6 col-lg-5"/>
+					<input type="text" placeholder="Last Name" class="col-xs-12 col-md-6 col-lg-5"/>
 				</div>
 				<input type="text" />
 				<input type="text" />
