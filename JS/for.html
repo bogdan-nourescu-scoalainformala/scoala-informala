@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>For & other loops JS</title>
+	<!--<script src="for.js"></script>-->
+	<script>
+		//afisam numele pare din array;
+		var array = [3, 6, 7, 8, 1, 2, 4, 99, 8, 6, 4, 3, 2, 6];
+		for (let i = 0; i < array.length; i++) {
+			if (array[i] % 2 === 0) {
+				console.log(array[i]);
+			}
+		}
+		//a ** b
+		//a*a*a*a
+
+		function pow(a, b) {
+			var p = 1;
+			for (let i = 0; i < b; i++) {
+				p *= a;
+			}
+			return p;
+		}
+		console.log("pow(2,3)", pow(2, 3));
+		console.log("pow(3,3)", pow(3, 3));
+
+		// sa se afiseze in consola tabla inmultirii lui X
+		//folosind for
+		function tablaInmultirii(x) {
+			for (let i = 1; i <= 10; i++) {
+				console.log(x + "x" + i + "=" + (x * i));
+			}
+		}
+		tablaInmultirii(7);
+
+		/*
+		1
+		22
+		333
+		4444
+		55555
+		666666
+		*/
+		function triunghi(n) {
+			for (let i = 1; i <= n; i++) {
+				let str = "";
+				for (let j = 0; j < i; j++) {
+					str += i;
+				}
+				console.log(str);
+			}
+		}
+		triunghi(6);
+
+		function randuri(n) {
+			for (let i = 1; i <= n; i++) {
+				var str = "";
+				for (let j = 0; j < i; j++) {
+					str += i;
+				}
+				console.log(str)
+			}
+		}
+		randuri(5);
+		//x+=5
+		//x=x+5;
+		//NU x = 5+x;
+
+		//1 1 2 3 5 8 13 21
+
+		//f(x)=f(x-1)+f(x-2)
+
+		function fibonaci(n) {
+			if (n === 1 || n === 2) {
+				return 1;
+			}
+			let a = 1;
+			let b = 1;
+			let c = 1;
+			for (let i = 2; i < n; i++) {
+				c = a + b;
+				a = b;
+				b = c;
+			}
+			return c;
+		}
+
+		console.log(fibonaci(1));
+		console.log(fibonaci(2));
+		console.log(fibonaci(3));
+		console.log(fibonaci(6));
+		console.log(fibonaci(8));
+
+		//A=5
+		//B=100
+		//X=70
+
+		//A=5
+		//B=100
+		//X=1
+
+		//X-A = -4
+		//X-B = -99
+
+		function pretulCorect(a, b, x) {
+			let difA = x - a;
+			let difB = x - b;
+			if (difA < 0) {
+				difA *= -1
+			}
+			if (difB < 0) {
+				difB *= -1
+			}
+			if (difA < difB) {
+				return a;
+			} else {
+				return b;
+			}
+		}
+		console.log(pretulCorect(5, 100, 1));
+		console.log(pretulCorect(5, 100, 30));
+		console.log(pretulCorect(5, 100, 70));
+		console.log(pretulCorect(5, 100, 170));
+
+
+		// Popescu I. Ion
+		// Popescu I. Ion (Necula)
+		"Ana are mere"
+
+		function numeComplet(nume, initiala, prenume, numeNastere) {
+			if (nume === numeNastere) {
+				// Popescu I. Ion
+				return nume + " " + initiala[0] + ". " + prenume;
+			} else {
+				return nume + " " + initiala[0] + ". " + prenume + " (" + numeNastere + ")";
+			}
+		}
+		console.log(numeComplet("Popescu", "Ionut", "Ion", "Popescu"));
+		console.log(numeComplet("Popescu", "Ionut", "Ion", "Necula"));
+		
+		
+		
+		
+	</script>
+</head>
+<body>
+
+</body>
+</html>
