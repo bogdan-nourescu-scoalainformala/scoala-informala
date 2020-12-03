@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Fizz Buzz</title>
+	<!--<script src="for.js"></script>-->
+	<script>
+		/**
+		Trebuie afisate primele N numere
+		N este divizibil cu 3 atunci afisez Fizz
+		N este divizibil cu 5 atunci afisez Buzz
+		N este divizibil si cu 3 si cu 5 atunci afisez FizzBuzz
+		N nu este divizibil nici cu 3 nici cu 5 afisez numarul respeciv
+
+		N=5
+		1,2,Fizz,4,Buzz
+
+		N=25
+		1,2,Fizz,4,Buzz,Fizz,7,8,Fizz,Buzz,11,Fizz,13,14,FizzBuzz, 16,17,Fizz,19,20,Fizz,22,23,Fizz,Buzz 
+		*/
+		function fizzBuzz(N){
+			var str = "";
+			for(var i=1;i<=N;i++){
+				if(i%3===0&& i%5===0){
+					str+="FizzBuzz";
+				}else if(i%3===0){
+					str+="Fizz";
+				}else if(i%5===0){
+					str+="Buzz";
+				}else {
+					str+=i;
+				}
+				
+				if (i<N) {
+					str+=", "
+				}
+			}
+			return str;
+		}
+		console.log(fizzBuzz(25));
+		
+		
+		
+		/**
+			Bolt:
+			Afisam numerele <N
+			Daca N este divizibil cu 7 atunci trebuie sa afisam Bolt
+			Daca N are una din cifre 7 atunci trebuie sa afisam Bolt
+			
+			In rest trebuie sa afisam numarul + sensul in care merge cercul
+			
+			1dreapta, 2dreapta, 3dreapta,...
+			6dreapta, bolt,8stanga,9stanga,...
+			13stanga,bolt,
+			15dreapta, 16 dreapta, bolt,
+			18stanga,19stanga,20stanga,bolt,
+			22dreapta, ...
+			26dreapta, bolt,bolt, 29dreapta
+			
+			75
+		*/
+		function bolt(n){
+			var directie = "dreapta";
+			var str="";
+			for(var i=1;i<n;i++){
+				if(i%7===0 || div7(i)===true){
+					str+="Bolt";
+					if(directie === "dreapta"){
+						directie = "stanga";
+					}else{
+						directie = "dreapta";
+					}
+				}else{
+					str+=i+directie;
+				}
+				
+				if (i<n-1) {
+					str+=", "
+				}
+			}
+			return str;
+		}
+		
+		function div7(x){
+			while(x>0){
+				if( (x%10) === 7){
+					return true;
+				}
+				x=Math.floor(x/10);
+			}
+			return false;
+		}
+		console.log(bolt(100));
+		
+		
+		
+		
+		/**
+			P1: 1
+			P2: 2
+			P3: 3
+			P4: 4
+			P5: 5
+			P1: 6
+			P2: Bolt
+			P1: 8
+			P5: 9
+			P4: 10
+			P3: 11
+			P2: 12
+			P1: 13
+			P5: Bolt
+			P1: 15
+			P2: 16
+			P3: Bolt
+			P2: 18
+			P1: 19
+			P5: 20
+			P4: Bolt
+			P5: 22
+		*/
+		function boltPersoane(n, nrPersoane){
+			var directie = "dreapta";
+			var persoana = 1;
+			var str="";
+			for(var i=1;i<n;i++){
+				if(i%7===0 || div7(i)===true){
+					str+="P"+persoana+": "+"Bolt"+"\n";
+					if(directie === "dreapta"){
+						directie = "stanga";
+					}else{
+						directie = "dreapta";
+					}
+				}else{
+					str+="P"+persoana+": "+i+"\n";
+				}
+				
+				if(directie==="dreapta"){
+					persoana++;
+					if(persoana>nrPersoane){
+						persoana=1;
+					}
+				}else{
+					persoana--;
+					if(persoana<1){
+						persoana=nrPersoane;
+					}
+				}
+			}
+			return str;
+		}
+		console.log(boltPersoane(100,8));
+	</script>
+</head>
+<body>
+
+</body>
+</html>
