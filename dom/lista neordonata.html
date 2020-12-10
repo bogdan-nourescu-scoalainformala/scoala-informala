@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chat</title>
+	<script>
+		let arr = ["asda","as","dasd"];
+		function draw(){
+			let str = "";
+			for(let i=0;i<arr.length;i++){
+				str+=`
+					<li>${arr[i]}</li>
+				`
+			}
+			let ul = document.querySelector("ul");
+			ul.innerHTML = str;
+		}
+		function add(){
+		
+			let input = document.querySelector("input");
+			let val = input.value;
+			if(val!==""){
+				arr.push(val);
+				draw();
+				input.value = "";
+			}
+		}
+		function sum(){
+			let val1 = document.querySelector("#nr1").value;
+			let val2 = document.querySelector("#nr2").value;
+			
+			let p = document.querySelector("p");
+			p.innerHTML = `
+				Rezultatul operatiei de adunare ${val1} + ${val2} = <span style="font-size:1.3em;">${Number(val1)+Number(val2)}</span>
+			`;
+		}
+	</script>
+<body onload="draw();">
+	
+	<input type="text">
+	<button onclick="add();">Adauga</button>
+	<ul>
+		
+	</ul>
+	
+	<input type="text" id="nr1" />
+	<input type="text" id="nr2" />
+	<button onclick="sum();">aduna</button>
+	<p></p>
+</body>
+</html>

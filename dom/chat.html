@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chat</title>
+	<style>
+		html {
+			height:100%;
+		}
+		body {
+			margin:0;
+			padding:0;
+			height:100%;
+			width:100%;
+			display:flex;
+			flex-direction:column;
+		}
+		#chatMessages {
+			flex:1;
+			overflow:auto;
+			background-color:teal;
+			display:flex;
+			flex-direction: column-reverse;
+		}
+		#chatBox {
+			height:75px;
+			display:flex;
+		}
+		#chatBox > textarea {
+			height:100%;
+			flex:1;
+			box-sizing:border-box;
+		}
+		#chatBox > button {
+			width:75px;
+			font-size:1.2em;
+		}
+		.message {
+			padding:5px;
+			border:1px solid darkgrey;
+			border-radius:10px;
+			background-color:white;
+			margin:5px;
+		}
+	</style>
+	<script>
+		let persoana = {
+			prenume:"Bogdan",
+			inaltime:1.75,
+			nume:"Nourescu",
+			varsta:32,
+			profesie:"Programator",
+			skilluri: ["Javascript","HTML","CSS","Limba engleza"],
+			adresa: {
+				localitate: "Bucuresti",
+				judet: "Sector 1",
+				str: "adadsads",
+				numar: "adasda",
+				bloc: "adsadsa",
+				codPostal: "adsdas"
+			}
+		}
+		let messages2 = [
+			{
+				message: "Primul mesaj",
+				user: "Bogdan",
+				data: "2020-12-08 20:15:30"
+			},
+			{
+				message: "2 mesaj",
+				user: "Florin",
+				data: "2020-12-08 20:15:30"
+			},
+			{
+				message: "3 mesaj",
+				user: "Sistem",
+				data: "2020-12-08 20:15:30"
+			},
+			{
+				message: "4 mesaj",
+				user: "Radu",
+				data: "2020-12-08 20:15:30"
+			},
+			{
+				message: "5 mesaj",
+				user: "Giga",
+				data: "2020-12-08 20:15:30"
+			}
+		];
+		
+		function draw2(){
+			let str = "";
+			for(let i = messages2.length - 1;i >= 0;i--){
+				str += `
+					<div class="message">
+						<div class="user">${messages2[i].user}</div>
+						<div class="content">${messages2[i].message}</div>
+					</div>
+				`
+			}
+			
+			let chatMessages = document.querySelector("#chatMessages");
+			chatMessages.innerHTML = str;
+		}
+		function addMessage2() {
+			let textarea = document.querySelector("#chatBox > textarea");
+			let val = textarea.value.trim();
+			messages2.push({
+				message: val,
+				user: "Sistem",
+				data: "2020-12-08 20:15:30"
+			});
+			draw2();
+			textarea.value = "";
+		}
+		
+		
+		
+		
+		
+		let messages = [
+			"asdadsa asda da dad",
+			"asdadsa ertertet da dad",
+			"qeweq asda da dad",
+			"asdadsa rtyryr da dad",
+			"uiyiuiyi asda da dad",
+			"asdadljsajkljkllasljkljlkda da dad",
+			"ertetertet asda da dad",
+		];
+		function draw(){
+			let user = "Sistem";
+			let str = "";
+			for(let i = messages.length - 1;i >= 0;i--){
+				str += `
+					<div class="message">
+						<div class="user">${user}</div>
+						<div class="content">${messages[i]}</div>
+					</div>
+				`
+			}
+			
+			let chatMessages = document.querySelector("#chatMessages");
+			chatMessages.innerHTML = str;
+		}
+		function addMessage() {
+			//varianta html5
+			//document.querySelector("#chatBox > textarea");
+			//document.querySelectorAll("#chatBox > textarea");
+			
+			//varianta clasica
+			//document.getElementById("chatBox")
+			//document.getElementsByClassName("message")
+		
+			let textarea = document.querySelector("#chatBox > textarea");
+			let val = textarea.value.trim();
+			messages.push(val);
+			draw();
+			textarea.value = "";
+		}
+		
+	
+		
+	</script>
+</head>
+<body onload="draw2();">
+	<div id="chatMessages">
+	</div>
+	<div id="chatBox">
+		<textarea></textarea>
+		<button onclick="addMessage2();">Save</button>
+	</div>
+</body>
+</html>
