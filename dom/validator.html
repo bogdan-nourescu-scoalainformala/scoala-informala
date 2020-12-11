@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chat</title>
+	<meta charset="UTF-8">
+	<style>
+		.mandatory{
+			color:red;
+			
+		}
+		#xxx{
+			display:flex;
+		}
+		.invalid{
+			background-color:#ff8f8f;
+			border-color:red;
+			border-radius:5px;
+		}
+		.valid{
+			background-color:green;
+			border-color:green;
+			border-radius:5px;
+		}
+		.hidden{
+			display:none !important;
+		}
+	</style>
+	<script>
+		function minMaxLength(elem, event, minLength, maxLength){
+			let value = elem.value;
+			if(value.length<minLength || value.length>maxLength){
+				//este eroare;
+				elem.classList.add("invalid");
+				elem.classList.remove("valid");
+			} else {
+				elem.classList.remove("invalid");
+				elem.classList.add("valid");
+			}
+		}
+		function clearInvalid(elem){
+			elem.classList.remove("valid");
+			elem.classList.remove("invalid");
+		}
+		function onKey(elem,event){
+			console.log(event);
+			if(elem.value.length>=10 || 
+				(event.key>="0" && event.key<="9")){
+				event.preventDefault();
+			}
+		}
+	</script>
+<body>
+	<form>
+		<label>
+			<span>Nume<span class="mandatory">*</span></span>
+			<input type="text" name="nume" onkeypress="onKey(this,event);" onfocus="clearInvalid(this, event);" onblur="minMaxLength(this, event, 3,10);"/>
+		</label>
+		<label>
+			<span>Prenume<span class="mandatory">*</span></span>
+			<input type="text" name="prenume" onfocus="clearInvalid(this, event);" onblur="minMaxLength(this, event, 3,10);"/>
+		</label>
+		<label>
+			<span>Adresa<span class="mandatory">*</span></span>
+			<textarea type="text" name="adresa" onfocus="clearInvalid(this, event);" onblur="minMaxLength(this, event, 10,100);"></textarea>
+		</label>
+	</form>
+</body>
+</html>
