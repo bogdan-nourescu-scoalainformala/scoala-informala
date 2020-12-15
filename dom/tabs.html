@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chat</title>
+	<meta charset="UTF-8">
+	<style>
+		.page{
+			display:none;
+		}
+		.buttonContainer > .active{
+			background-color:yellow;
+		}
+		.pageContainer > .page.active{
+			display:block;
+		}
+	</style>
+	<script>
+		function changeTab(button,event, idx){
+			let oldActiveButton = document.querySelector("button.active");
+			oldActiveButton.classList.remove("active");
+		
+			button.classList.add("active");
+			
+			let oldPage = document.querySelector(".page.active");
+			oldPage.classList.remove("active");
+			
+			let pages = document.querySelectorAll(".page")
+			let page = pages[idx];
+			page.classList.add("active");
+		}
+	</script>
+<body>
+	<div class="buttonContainer">
+		<button onclick="changeTab(this, event, 0);">1</button>
+		<button class="active" onclick="changeTab(this, event, 1);">2</button>
+		<button onclick="changeTab(this, event, 2);">3</button>
+		<button onclick="changeTab(this, event ,3);">4</button>
+	</div>
+	<div class="pageContainer">
+		<section class="page">Continut 1</section>
+		<section class="page active">Continut 2</section>
+		<section class="page">Continut 3</section>
+		<section class="page">Continut 4</section>
+	</div>
+</body>
+</html>
