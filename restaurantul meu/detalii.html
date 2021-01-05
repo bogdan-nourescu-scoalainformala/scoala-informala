@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Restaurantul meu</title>
+	<style>
+		body,html{
+			margin:0;
+			padding:0;
+		}
+		#slideshow{
+			display:flex;
+			align-items:center;
+			justify-content:space-between;
+		}
+		#main{
+			max-width:1200px;
+			background-color:yellow;
+			margin:0 auto;
+		}
+		#title{
+			margin:0;
+			text-align:center;
+		}
+	</style>
+	<script>
+		let lista = [
+			{
+				"poze":["https://www.agro.basf.ro/Pictures/migrated_pictures/imagini_articole_pictures/articol_seo_cultura_porumbului_pictures/cultura_porumb_hibrizi_750x422.jpg"],
+				"nume": "Ciolan",
+				"ingrediente": [
+					{
+						"numeIngredient":"carne pui",
+						"valoare": 500,
+						"um": "g"
+					},
+					{
+						"numeIngredient":"oua",
+						"valoare": 5,
+						"um": "buc"
+					}
+				],
+				"preparare":"......",
+				"timpPreparare":75,
+			},
+			{
+				"poze":["https://cich.ro/wp-content/uploads/2017/09/Grau1.jpg"],
+				"nume": "XXXX",
+				"ingrediente": [
+					{
+						"numeIngredient":"carne pui",
+						"valoare": 200,
+						"um": "g"
+					},
+					{
+						"numeIngredient":"oua",
+						"valoare": 5,
+						"um": ""
+					},
+					{
+						"numeIngredient":"oua",
+						"valoare": 5,
+						"um": ""
+					}
+				],
+				"preparare":"......",
+				"timpPreparare":75,
+			},
+			{
+				"poze":["https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Pylon_ds.jpg/220px-Pylon_ds.jpg"],
+				"nume": "TYYYYYY",
+				"ingrediente": [
+					{
+						"numeIngredient":"<b>carne pui</b>",
+						"valoare": 100,
+						"um": "g"
+					},
+					{
+						"numeIngredient":"carne pui",
+						"valoare": 100,
+						"um": "g"
+					},
+					{
+						"numeIngredient":"oua",
+						"valoare": 5,
+						"um": ""
+					}
+				],
+				"preparare":"......",
+				"timpPreparare":75,
+			},
+			{
+				"poze":[],
+				"nume": "TYYYYYY",
+				"ingrediente": [
+					{
+						"numeIngredient":"carne pui",
+						"valoare": 100,
+						"um": "g"
+					},
+					{
+						"numeIngredient":"carne pui",
+						"valoare": 100,
+						"um": "g"
+					},
+					{
+						"numeIngredient":"oua",
+						"valoare": 5,
+						"um": ""
+					}
+				],
+				"preparare":"......",
+				"timpPreparare":75,
+			}
+			
+		];
+		
+		var index = window.location.search.substr(4);
+		function draw(){
+			document.querySelector("#nume").innerText=lista[index].nume;
+			
+			let poza;
+			if (lista[index].poze.length===0) {
+				poza="https://gfsstore.com/wp-content/themes/gfsstore.com/images/no_image_available.png";
+			} else {
+				poza=lista[index].poze[0];
+			}
+			document.querySelector("#poze").src=poza;
+			
+			
+			document.querySelector("#preparare").innerText=lista[index].preparare;
+			
+			let ingrediente=lista[index].ingrediente;
+			let strIngrediente = "";
+			for(let j=0;j<ingrediente.length;j++){
+				strIngrediente += `<li>${ingrediente[j].valoare} ${ingrediente[j].um} ${ingrediente[j].numeIngredient.replace(/</g,"&lt;")}</li>`
+			}
+			document.querySelector("#ingrediente").innerHTML = strIngrediente;
+		}
+	</script>
+</head>
+<body onload="draw();">
+	<div id="main">
+		<h1 id="nume"></h1>
+		<div id="slideshow">
+			<button>&lt;</button>
+			<img id="poze" src="" />
+			<button>&gt;</button>
+		</div>
+		<div>
+			<ul id="ingrediente">
+				
+			<ul>
+			<p id="preparare">
+				
+			</p>
+		</div>
+	<div>
+</body>
+</html>
