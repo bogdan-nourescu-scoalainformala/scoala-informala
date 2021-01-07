@@ -1,0 +1,89 @@
+[
+	{
+		"poze":["https://www.agro.basf.ro/Pictures/migrated_pictures/imagini_articole_pictures/articol_seo_cultura_porumbului_pictures/cultura_porumb_hibrizi_750x422.jpg"],
+		"nume": "Ciolan",
+		"ingrediente": [
+			{
+				"numeIngredient":"carne pui",
+				"valoare": 500,
+				"um": "g"
+			},
+			{
+				"numeIngredient":"oua",
+				"valoare": 5,
+				"um": "buc"
+			}
+		],
+		"preparare":"......",
+		"timpPreparare":75
+	},
+	{
+		"poze":["https://cich.ro/wp-content/uploads/2017/09/Grau1.jpg"],
+		"nume": "XXXX",
+		"ingrediente": [
+			{
+				"numeIngredient":"carne pui",
+				"valoare": 200,
+				"um": "g"
+			},
+			{
+				"numeIngredient":"oua",
+				"valoare": 5,
+				"um": ""
+			},
+			{
+				"numeIngredient":"oua",
+				"valoare": 5,
+				"um": ""
+			}
+		],
+		"preparare":"......",
+		"timpPreparare":75
+	},
+	{
+		"poze":["https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Pylon_ds.jpg/220px-Pylon_ds.jpg"],
+		"nume": "TYYYYYY",
+		"ingrediente": [
+			{
+				"numeIngredient":"carne pui",
+				"valoare": 100,
+				"um": "g"
+			},
+			{
+				"numeIngredient":"carne pui",
+				"valoare": 100,
+				"um": "g"
+			},
+			{
+				"numeIngredient":"oua",
+				"valoare": 5,
+				"um": ""
+			}
+		],
+		"preparare":"......",
+		"timpPreparare":75
+	},
+	{
+		"poze":[],
+		"nume": "TYYYYYY",
+		"ingrediente": [
+			{
+				"numeIngredient":"carne pui",
+				"valoare": 100,
+				"um": "g"
+			},
+			{
+				"numeIngredient":"carne pui",
+				"valoare": 100,
+				"um": "g"
+			},
+			{
+				"numeIngredient":"oua",
+				"valoare": 5,
+				"um": ""
+			}
+		],
+		"preparare":"......",
+		"timpPreparare":75
+	}
+]

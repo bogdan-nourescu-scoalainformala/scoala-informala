@@ -2,6 +2,8 @@
 <html>
 <head>
 	<title>Restaurantul meu</title>
+	
+	<link rel="stylesheet" href="loading.css">
 	<style>
 		.menu-item{
 			display:flex;
@@ -28,98 +30,40 @@
 		.hidden{
 			display:none !important;
 		}
+		
+		.lds-ripple div{
+			border-color:red;
+		}
+		#loading{
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			margin: auto;
+			width:200px;
+			height:200px;
+		}
 	</style>
 	<script>
-		let lista = [
-			{
-				"poze":["https://www.agro.basf.ro/Pictures/migrated_pictures/imagini_articole_pictures/articol_seo_cultura_porumbului_pictures/cultura_porumb_hibrizi_750x422.jpg"],
-				"nume": "Ciolan",
-				"ingrediente": [
-					{
-						"numeIngredient":"carne pui",
-						"valoare": 500,
-						"um": "g"
-					},
-					{
-						"numeIngredient":"oua",
-						"valoare": 5,
-						"um": "buc"
-					}
-				],
-				"preparare":"......",
-				"timpPreparare":75,
-			},
-			{
-				"poze":["https://cich.ro/wp-content/uploads/2017/09/Grau1.jpg"],
-				"nume": "XXXX",
-				"ingrediente": [
-					{
-						"numeIngredient":"carne pui",
-						"valoare": 200,
-						"um": "g"
-					},
-					{
-						"numeIngredient":"oua",
-						"valoare": 5,
-						"um": ""
-					},
-					{
-						"numeIngredient":"oua",
-						"valoare": 5,
-						"um": ""
-					}
-				],
-				"preparare":"......",
-				"timpPreparare":75,
-			},
-			{
-				"poze":["https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Pylon_ds.jpg/220px-Pylon_ds.jpg"],
-				"nume": "TYYYYYY",
-				"ingrediente": [
-					{
-						"numeIngredient":"carne pui",
-						"valoare": 100,
-						"um": "g"
-					},
-					{
-						"numeIngredient":"carne pui",
-						"valoare": 100,
-						"um": "g"
-					},
-					{
-						"numeIngredient":"oua",
-						"valoare": 5,
-						"um": ""
-					}
-				],
-				"preparare":"......",
-				"timpPreparare":75,
-			},
-			{
-				"poze":[],
-				"nume": "TYYYYYY",
-				"ingrediente": [
-					{
-						"numeIngredient":"carne pui",
-						"valoare": 100,
-						"um": "g"
-					},
-					{
-						"numeIngredient":"carne pui",
-						"valoare": 100,
-						"um": "g"
-					},
-					{
-						"numeIngredient":"oua",
-						"valoare": 5,
-						"um": ""
-					}
-				],
-				"preparare":"......",
-				"timpPreparare":75,
-			}
+		let lista = [];
+		
+		let url = "https://restaurantul-meu-49822-default-rtdb.europe-west1.firebasedatabase.app/";
+		
+		
+		async function getLista() {
+			//aici afisez loading
+		
+			document.querySelector("#loading").classList.remove("hidden");
 			
-		];
+			const response = await fetch(url+".json");
+			lista = await response.json();
+		  
+			document.querySelector("#loading").classList.add("hidden");
+
+			draw();
+		}
+		
 		function draw(){
 			let cuvantCautat = document.querySelector('[name="search"]').value;
 		
@@ -132,7 +76,7 @@
 					strIngrediente += `${ingrediente[j].valoare} ${ingrediente[j].um} ${ingrediente[j].numeIngredient}, `
 				}
 				let poza;
-				if (lista[i].poze.length===0) {
+				if (lista[i].poze===undefined || lista[i].poze.length===0) {
 					poza="https://gfsstore.com/wp-content/themes/gfsstore.com/images/no_image_available.png";
 				} else {
 					poza=lista[i].poze[0];
@@ -147,7 +91,7 @@
 								<div>${lista[i].nume}</div>
 								<div>${strIngrediente}</div>
 							</div>
-							<button>Detalii</button>
+							<a href="detalii.html?id=${i}" ><button>Detalii</button></a>
 						</div>
 					`
 				}
@@ -170,7 +114,10 @@
 		}
 	</script>
 </head>
-<body onload="draw()">
+<body onload="getLista();">
+	<div id="loading" class="lds-ripple"><div></div><div></div></div>
+
+
 	<header><h1>Cald si Bun</h1></header>
 	<section>
 		<input type="text" name="search" />
