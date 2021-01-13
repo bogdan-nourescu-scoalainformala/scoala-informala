@@ -23,33 +23,35 @@
 		}
 	</style>
 	<script>
-		let lista = [];
+		let preparat = {};
 		let url = "https://restaurantul-meu-49822-default-rtdb.europe-west1.firebasedatabase.app/";
-		
-		
+		var index = window.location.search.substr(4);
+		if(index.length<1){
+			window.location = "index.html";
+		}
 		async function getLista() {
-		  const response = await fetch(url+".json");
-		  lista = await response.json();
+		  const response = await fetch(url+index+".json");
+		  preparat = await response.json();
 		  draw();
 		}
 		
 		
-		var index = window.location.search.substr(4);
+		
 		function draw(){
-			document.querySelector("#nume").innerText=lista[index].nume;
+			document.querySelector("#nume").innerText=preparat.nume;
 			
 			let poza;
-			if (lista[index].poze===undefined || lista[index].poze.length===0) {
+			if (preparat.poze===undefined || preparat.poze.length===0) {
 				poza="https://gfsstore.com/wp-content/themes/gfsstore.com/images/no_image_available.png";
 			} else {
-				poza=lista[index].poze[0];
+				poza=preparat.poze[0];
 			}
 			document.querySelector("#poze").src=poza;
 			
 			
-			document.querySelector("#preparare").innerText=lista[index].preparare;
+			document.querySelector("#preparare").innerText=preparat.preparare;
 			
-			let ingrediente=lista[index].ingrediente;
+			let ingrediente=preparat.ingrediente;
 			let strIngrediente = "";
 			for(let j=0;j<ingrediente.length;j++){
 				strIngrediente += `<li>${ingrediente[j].valoare} ${ingrediente[j].um} ${ingrediente[j].numeIngredient.replace(/</g,"&lt;")}</li>`

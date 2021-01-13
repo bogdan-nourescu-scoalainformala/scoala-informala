@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Restaurantul meu</title>
+	<style>
+		body,html{
+			margin:0;
+			padding:0;
+		}
+		#slideshow{
+			display:flex;
+			align-items:center;
+			justify-content:space-between;
+		}
+		#main{
+			max-width:1200px;
+			background-color:yellow;
+			margin:0 auto;
+		}
+		#title{
+			margin:0;
+			text-align:center;
+		}
+	</style>
+	<script>
+		let url = "https://restaurantul-meu-49822-default-rtdb.europe-west1.firebasedatabase.app/";
+		async function salveaza(event){
+			event.preventDefault();
+			let nume = document.querySelector("[name='nume']").value;
+			let poze = document.querySelector("[name='poze']").value;
+			let timpPreparare = document.querySelector("[name='timpPreparare']").value;
+			let ingrediente = document.querySelector("[name='ingrediente']").value;
+			let preparare = document.querySelector("[name='preparare']").value;
+			
+			let preparatNou = {
+				"nume":nume,
+				"poze":[poze],
+				"timpPreparare":Number(timpPreparare),
+				"ingrediente":[
+					{
+						"numeIngredient":ingrediente,
+						"valoare": 0,
+						"um": ""
+					}
+				],
+				"preparare":preparare
+			};
+			console.log(preparatNou);
+			const response = await fetch(url+".json", {
+				method:"post",
+				body: JSON.stringify(preparatNou),
+			    headers: {
+				  'Content-Type': 'application/json'
+				},
+			});
+			preparat = await response.json();
+		}
+	</script>
+</head>
+<body >
+	<div id="loading" class="lds-ripple"><div></div><div></div></div>
+	<header><h1>Cald si Bun</h1></header>
+	<form onsubmit="salveaza(event);">
+		<table>
+			<tr>
+				<td>Nume</td>
+				<td><input type="text" name="nume"/></td>
+			</tr>
+			<tr>
+				<td>Poze</td>
+				<td><input type="text" name="poze"/></td>
+			</tr>
+			<tr>
+				<td>Timp Preparare</td>
+				<td><input type="number" name="timpPreparare"/></td>
+			</tr>
+			<tr>
+				<td>Ingrediente</td>
+				<td><textarea  name="ingrediente"></textarea></td>
+			</tr>
+			<tr>
+				<td>Preparare</td>
+				<td><textarea  name="preparare"></textarea></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" /></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

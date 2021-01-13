@@ -1,89 +1,238 @@
-[
-	{
-		"poze":["https://www.agro.basf.ro/Pictures/migrated_pictures/imagini_articole_pictures/articol_seo_cultura_porumbului_pictures/cultura_porumb_hibrizi_750x422.jpg"],
-		"nume": "Ciolan",
-		"ingrediente": [
-			{
-				"numeIngredient":"carne pui",
-				"valoare": 500,
-				"um": "g"
-			},
-			{
-				"numeIngredient":"oua",
-				"valoare": 5,
-				"um": "buc"
-			}
-		],
-		"preparare":"......",
-		"timpPreparare":75
-	},
-	{
-		"poze":["https://cich.ro/wp-content/uploads/2017/09/Grau1.jpg"],
-		"nume": "XXXX",
-		"ingrediente": [
-			{
-				"numeIngredient":"carne pui",
-				"valoare": 200,
-				"um": "g"
-			},
-			{
-				"numeIngredient":"oua",
-				"valoare": 5,
-				"um": ""
-			},
-			{
-				"numeIngredient":"oua",
-				"valoare": 5,
-				"um": ""
-			}
-		],
-		"preparare":"......",
-		"timpPreparare":75
-	},
-	{
-		"poze":["https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Pylon_ds.jpg/220px-Pylon_ds.jpg"],
-		"nume": "TYYYYYY",
-		"ingrediente": [
-			{
-				"numeIngredient":"carne pui",
-				"valoare": 100,
-				"um": "g"
-			},
-			{
-				"numeIngredient":"carne pui",
-				"valoare": 100,
-				"um": "g"
-			},
-			{
-				"numeIngredient":"oua",
-				"valoare": 5,
-				"um": ""
-			}
-		],
-		"preparare":"......",
-		"timpPreparare":75
-	},
-	{
-		"poze":[],
-		"nume": "TYYYYYY",
-		"ingrediente": [
-			{
-				"numeIngredient":"carne pui",
-				"valoare": 100,
-				"um": "g"
-			},
-			{
-				"numeIngredient":"carne pui",
-				"valoare": 100,
-				"um": "g"
-			},
-			{
-				"numeIngredient":"oua",
-				"valoare": 5,
-				"um": ""
-			}
-		],
-		"preparare":"......",
-		"timpPreparare":75
-	}
-]
+{
+  "0" : {
+    "ingrediente" : [ {
+      "numeIngredient" : "carne pui",
+      "um" : "g",
+      "valoare" : 500
+    }, {
+      "numeIngredient" : "oua",
+      "um" : "buc",
+      "valoare" : 5
+    } ],
+    "nume" : "Ciolan",
+    "poze" : [ "https://www.agro.basf.ro/Pictures/migrated_pictures/imagini_articole_pictures/articol_seo_cultura_porumbului_pictures/cultura_porumb_hibrizi_750x422.jpg" ],
+    "preparare" : "......",
+    "timpPreparare" : 75
+  },
+  "1" : {
+    "ingrediente" : [ {
+      "numeIngredient" : "carne pui",
+      "um" : "g",
+      "valoare" : 200
+    }, {
+      "numeIngredient" : "oua",
+      "um" : "",
+      "valoare" : 5
+    }, {
+      "numeIngredient" : "oua",
+      "um" : "",
+      "valoare" : 5
+    } ],
+    "nume" : "XXXX",
+    "poze" : [ "https://savoriurbane.com/wp-content/uploads/2016/10/Paine-romaneasca-traditionala-de-casa-cu-maia-Savori-Urbane.jpg" ],
+    "preparare" : "......",
+    "timpPreparare" : 75
+  },
+  "2" : {
+    "ingrediente" : [ {
+      "numeIngredient" : "carne pui",
+      "um" : "g",
+      "valoare" : 100
+    }, {
+      "numeIngredient" : "carne pui",
+      "um" : "g",
+      "valoare" : 100
+    }, {
+      "numeIngredient" : "oua",
+      "um" : "",
+      "valoare" : 5
+    } ],
+    "nume" : "TYYYYYY",
+    "poze" : [ "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Pylon_ds.jpg/220px-Pylon_ds.jpg" ],
+    "preparare" : "......",
+    "timpPreparare" : 75
+  },
+  "3" : {
+    "ingrediente" : [ {
+      "numeIngredient" : "carne pui",
+      "um" : "g",
+      "valoare" : 100
+    }, {
+      "numeIngredient" : "carne pui",
+      "um" : "g",
+      "valoare" : 100
+    }, {
+      "numeIngredient" : "oua",
+      "um" : "",
+      "valoare" : 5
+    } ],
+    "nume" : "TYYYYYY",
+    "preparare" : "......",
+    "timpPreparare" : 75
+  },
+  "-MQrjE7oLguyrr6aD-5o" : {
+    "ingrediente" : [ {
+      "numeIngredient" : "qeqeqweqe",
+      "um" : "",
+      "valoare" : 0
+    } ],
+    "nume" : "Descarcă fișa de înscriere",
+    "poze" : [ "https://jamilacuisine.ro/wp-content/uploads/2014/11/Paine-cu-cartofi-500x460.jpg" ],
+    "preparare" : "qewqweqweq",
+    "timpPreparare" : 1231
+  },
+  "-MQrk0YY5q2b7VL8bS2A" : {
+    "ingrediente" : [ {
+      "numeIngredient" : "qeqeqweqe",
+      "um" : "",
+      "valoare" : 0
+    } ],
+    "nume" : "Descarcă fișa de înscriere",
+    "poze" : [ "https://jamilacuisine.ro/wp-content/uploads/2014/11/Paine-cu-cartofi-500x460.jpg" ],
+    "preparare" : "qewqweqweq",
+    "timpPreparare" : 1231
+  },
+  "-MQrk2vJQNUeKn-dJXEy" : {
+    "ingrediente" : [ {
+      "numeIngredient" : "qeqeqweqe",
+      "um" : "",
+      "valoare" : 0
+    } ],
+    "nume" : "Descarcă fișa de înscriere",
+    "poze" : [ "https://jamilacuisine.ro/wp-content/uploads/2014/11/Paine-cu-cartofi-500x460.jpg" ],
+    "preparare" : "qewqweqweq",
+    "timpPreparare" : 1231
+  },
+  "-MQrk32LfW121hHsQ7Na" : {
+    "ingrediente" : [ {
+      "numeIngredient" : "qeqeqweqe",
+      "um" : "",
+      "valoare" : 0
+    } ],
+    "nume" : "Descarcă fișa de înscriere",
+    "poze" : [ "https://jamilacuisine.ro/wp-content/uploads/2014/11/Paine-cu-cartofi-500x460.jpg" ],
+    "preparare" : "qewqweqweq",
+    "timpPreparare" : 1231
+  },
+  "-MQrk38zvheWv5mgJqL3" : {
+    "ingrediente" : [ {
+      "numeIngredient" : "qeqeqweqe",
+      "um" : "",
+      "valoare" : 0
+    } ],
+    "nume" : "Descarcă fișa de înscriere",
+    "poze" : [ "https://jamilacuisine.ro/wp-content/uploads/2014/11/Paine-cu-cartofi-500x460.jpg" ],
+    "preparare" : "qewqweqweq",
+    "timpPreparare" : 1231
+  },
+  "-MQrk3BqhcOdWXaGTNym" : {
+    "ingrediente" : [ {
+      "numeIngredient" : "qeqeqweqe",
+      "um" : "",
+      "valoare" : 0
+    } ],
+    "nume" : "Descarcă fișa de înscriere",
+    "poze" : [ "https://jamilacuisine.ro/wp-content/uploads/2014/11/Paine-cu-cartofi-500x460.jpg" ],
+    "preparare" : "qewqweqweq",
+    "timpPreparare" : 1231
+  },
+  "-MQrk3Dy1XMBbHBC0Bfh" : {
+    "ingrediente" : [ {
+      "numeIngredient" : "qeqeqweqe",
+      "um" : "",
+      "valoare" : 0
+    } ],
+    "nume" : "Descarcă fișa de înscriere",
+    "poze" : [ "https://jamilacuisine.ro/wp-content/uploads/2014/11/Paine-cu-cartofi-500x460.jpg" ],
+    "preparare" : "qewqweqweq",
+    "timpPreparare" : 1231
+  },
+  "-MQrk3GN10K8lmIs_6wu" : {
+    "ingrediente" : [ {
+      "numeIngredient" : "qeqeqweqe",
+      "um" : "",
+      "valoare" : 0
+    } ],
+    "nume" : "Descarcă fișa de înscriere",
+    "poze" : [ "https://jamilacuisine.ro/wp-content/uploads/2014/11/Paine-cu-cartofi-500x460.jpg" ],
+    "preparare" : "qewqweqweq",
+    "timpPreparare" : 1231
+  },
+  "-MQrk3IdHODXXFthTSFi" : {
+    "ingrediente" : [ {
+      "numeIngredient" : "qeqeqweqe",
+      "um" : "",
+      "valoare" : 0
+    } ],
+    "nume" : "Descarcă fișa de înscriere",
+    "poze" : [ "https://jamilacuisine.ro/wp-content/uploads/2014/11/Paine-cu-cartofi-500x460.jpg" ],
+    "preparare" : "qewqweqweq",
+    "timpPreparare" : 1231
+  },
+  "-MQrk3KvJZEjZUk4t8hs" : {
+    "ingrediente" : [ {
+      "numeIngredient" : "qeqeqweqe",
+      "um" : "",
+      "valoare" : 0
+    } ],
+    "nume" : "Descarcă fișa de înscriere",
+    "poze" : [ "https://jamilacuisine.ro/wp-content/uploads/2014/11/Paine-cu-cartofi-500x460.jpg" ],
+    "preparare" : "qewqweqweq",
+    "timpPreparare" : 1231
+  },
+  "-MQrk3NIPwAApPXZV-cr" : {
+    "ingrediente" : [ {
+      "numeIngredient" : "qeqeqweqe",
+      "um" : "",
+      "valoare" : 0
+    } ],
+    "nume" : "Descarcă fișa de înscriere",
+    "poze" : [ "https://jamilacuisine.ro/wp-content/uploads/2014/11/Paine-cu-cartofi-500x460.jpg" ],
+    "preparare" : "qewqweqweq",
+    "timpPreparare" : 1231
+  },
+  "-MQrk3PiPp93dHQn9F_f" : {
+    "ingrediente" : [ {
+      "numeIngredient" : "qeqeqweqe",
+      "um" : "",
+      "valoare" : 0
+    } ],
+    "nume" : "Descarcă fișa de înscriere",
+    "poze" : [ "https://jamilacuisine.ro/wp-content/uploads/2014/11/Paine-cu-cartofi-500x460.jpg" ],
+    "preparare" : "qewqweqweq",
+    "timpPreparare" : 1231
+  },
+  "-MQrk3RrFU0gspRJhGb0" : {
+    "ingrediente" : [ {
+      "numeIngredient" : "qeqeqweqe",
+      "um" : "",
+      "valoare" : 0
+    } ],
+    "nume" : "Descarcă fișa de înscriere",
+    "poze" : [ "https://jamilacuisine.ro/wp-content/uploads/2014/11/Paine-cu-cartofi-500x460.jpg" ],
+    "preparare" : "qewqweqweq",
+    "timpPreparare" : 1231
+  },
+  "-MQrk3UHnVXk32H3-GZV" : {
+    "ingrediente" : [ {
+      "numeIngredient" : "qeqeqweqe",
+      "um" : "",
+      "valoare" : 0
+    } ],
+    "nume" : "Descarcă fișa de înscriere",
+    "poze" : [ "https://jamilacuisine.ro/wp-content/uploads/2014/11/Paine-cu-cartofi-500x460.jpg" ],
+    "preparare" : "qewqweqweq",
+    "timpPreparare" : 1231
+  },
+  "-MQrk3WKLZ7dPVR7YSaa" : {
+    "ingrediente" : [ {
+      "numeIngredient" : "qeqeqweqe",
+      "um" : "",
+      "valoare" : 0
+    } ],
+    "nume" : "Descarcă fișa de înscriere",
+    "poze" : [ "https://jamilacuisine.ro/wp-content/uploads/2014/11/Paine-cu-cartofi-500x460.jpg" ],
+    "preparare" : "qewqweqweq",
+    "timpPreparare" : 1231
+  }
+}
