@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CRUD</title>
+	<style>
+		.delete, .edit{
+			width:30px;
+		}
+		.hidden{
+			display:none !important;
+		}
+	</style>
+	<script>
+		let url = "https://crud-956c2.europe-west1.firebasedatabase.app/bogdan-nourescu/"
+	
+		//CRUD = Create, Read, Update, Delete;
+		let inregistrari = {};
+		let indexEditare = -1;
+		
+		async function getInregistrari() {
+			const response = await fetch(url+".json");
+			inregistrari = await response.json();
+			if(inregistrari===null){
+				inregistrari = {};
+			}
+			draw();
+		}
+		
+		function draw(){
+			let str = "";
+			for(let [id, inregistrare] of Object.entries(inregistrari)){
+				str+=`
+					<tr>
+						<td>${inregistrare.data}</td>
+						<td><a href="${inregistrare.link}" target="_blank">Link</a></td>
+						<td>${inregistrare.parola}</td>
+						<td>
+							<img class="delete" src="icons/icon-delete-16.jpg" onclick="del('${id}');" />
+							<img class="edit" src="icons/edit.png" onclick="edit('${id}');" />
+						</td>
+					</tr>
+				`
+			}
+			document.querySelector("#zoom tbody").innerHTML=str;
+		}
+		/**
+			Preia informatiile din array si le populeaza in Formular.
+		*/
+		function edit(idx){
+			let inregistrare = inregistrari[idx];
+			document.querySelector("[name='link']").value=inregistrare.link;
+			document.querySelector("[name='parola']").value=inregistrare.parola;
+			document.querySelector("[name='data']").value=inregistrare.data;
+			indexEditare = idx;
+			document.querySelector("#editBtn").classList.remove("hidden");
+			document.querySelector("#addBtn").classList.add("hidden");
+			showForm();
+		}
+		
+		/**
+			Preia informatiile formular si le actualizeaza in array;
+		*/
+		async function editPasul2(){
+			if(indexEditare===-1){
+				return;
+			}
+			let inregistrare = {};
+			inregistrare.link = document.querySelector("[name='link']").value;
+			inregistrare.parola = document.querySelector("[name='parola']").value;
+			inregistrare.data = document.querySelector("[name='data']").value;
+			
+			const response = await fetch(url+indexEditare+".json", {
+				method:"put",
+				body: JSON.stringify(inregistrare),
+			    headers: {
+				  'Content-Type': 'application/json'
+				},
+			});
+			await response.json();
+			
+			await getInregistrari();
+			
+			cancel();
+		}
+		function cancel(){
+			indexEditare = -1;
+			document.querySelector("#editBtn").classList.add("hidden");
+			document.querySelector("#addBtn").classList.remove("hidden");
+			
+			document.querySelector("form").reset();
+			//cu reset sau asa:
+			//document.querySelector("[name='data']").value="";
+			//document.querySelector("[name='parola']").value="";
+			//document.querySelector("[name='link']").value="";
+			
+			hideForm();
+		}
+		async function del(idx){
+			if(confirm(`Esti sigur ca vrei sa stergi inregistrarea de la data de ${inregistrari[idx].data} ?`)){
+				const response = await fetch(url+idx+".json", {
+					method:"delete"
+				});
+				await response.json();
+				
+				await getInregistrari();
+			}
+			
+		}
+		async function adauga(){
+			let link = document.querySelector("[name='link']").value;
+			let parola = document.querySelector("[name='parola']").value;
+			let data = document.querySelector("[name='data']").value;
+			
+			
+			const response = await fetch(url+".json", {
+				method:"post",
+				body: JSON.stringify({
+					"link": link,
+					"parola": parola,
+					"data": data
+				}),
+			    headers: {
+				  'Content-Type': 'application/json'
+				},
+			});
+			await response.json();
+			
+			await getInregistrari();
+			hideForm();
+		}
+		function hideForm(){
+			document.querySelector("form").classList.add("hidden");
+			document.querySelector("#zoom").classList.remove("hidden");
+			document.querySelector("#plusBtn").classList.remove("hidden");
+		}
+		function showForm(){
+			document.querySelector("form").classList.remove("hidden");
+			document.querySelector("#zoom").classList.add("hidden");
+			document.querySelector("#plusBtn").classList.add("hidden");
+		}
+	</script>
+</head>
+<body onload="getInregistrari();">
+	<form onsubmit="event.preventDefault();adauga();" class="hidden" >
+		<label>
+			Link:<input type="text" name="link"/>
+		</label><br />
+		<label>
+			Parola:<input type="password" name="parola"/>
+		</label><br />
+		<label>
+			data:<input type="date" name="data"/>
+		</label><br />
+		<input id="addBtn" type="submit" value="Adauga"/>
+		<input id="editBtn" type="button" onclick="editPasul2();" class="hidden" value="Editeaza"/>
+		<input id="cancelBtn" type="button" onclick="cancel();" value="Cancel"/>
+	</form>
+	<input id="plusBtn" type="button" value="+" onclick="showForm();"/>
+	<table id="zoom" border="1" style="border-collapse:collapse;">
+		<thead>
+			<tr>
+				<th>Data</th>
+				<th>Link</th>
+				<th>Parola</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+</body>
+</html>
