@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Cad Dog or Fox?</title>
+	<style>
+		#image{
+			width:300px;
+		}
+	</style>
+	<script>
+		async function changeImage(){
+			let pet = document.querySelector("#options").value;
+			let url = "";
+			if(pet==="Cat"){
+				let r = await fetch("https://aws.random.cat/meow")
+				let json = await r.json();
+				url = json.file;
+			}else if(pet==="Dog"){
+				let r = await fetch("https://random.dog/woof.json")
+				let json = await r.json();
+				url = json.url;
+			}else if(pet==="Fox"){
+				let r = await fetch("https://randomfox.ca/floof/")
+				let json = await r.json();
+				url = json.image;
+			}
+			document.querySelector("#image").src = url;
+		}
+	</script>
+</head>
+<body >
+	<select id="options">
+		<option>Cat</option>
+		<option>Dog</option>
+		<option>Fox</option>
+	</select>
+	<button onclick="changeImage();">Change Image</button>
+	<img src="" id="image"/>
+</body>
+</html>
