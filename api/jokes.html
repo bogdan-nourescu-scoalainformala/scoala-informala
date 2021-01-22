@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Random Joke?</title>
+	<style>
+	</style>
+	<script>
+		let url = "http://api.icndb.com/jokes/random";
+		async function getJoke(){
+			let queryMap = {
+				"Nerdy": "?limitTo=[nerdy]",
+				"Explicit": "?limitTo=[explicit]",
+				"Chuck Norris": "?firstName=Chuck&lastName=Norris",
+				"John Doe": "?firstName=John&lastName=Doe",
+				"Random": "",
+				"Nerdy Explicit": "?limitTo=[nerdy,explicit]"
+			}
+			let option  = document.querySelector("#options").value;
+			let response = await fetch (url + queryMap[option]);
+			let json = await response.json();
+			let joke = json.value.joke;
+			document.querySelector("#joke").innerText = joke;
+		}
+	</script>
+</head>
+<body >
+	<select id="options">
+		<option>Nerdy</option>
+		<option>Explicit</option>
+		<option>Chuck Norris</option>
+		<option>Random</option>
+		<option>Nerdy Explicit</option>
+		<option>John Doe</option>
+	</select>
+	<button onclick="getJoke();">Get Joke</button>
+	<p id="joke">Click get joke to get a new joke</p>
+</body>
+</html>

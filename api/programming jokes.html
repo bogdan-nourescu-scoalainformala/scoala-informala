@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Random Joke?</title>
+	<style>
+	
+		.hidden{
+			display:none !important;
+		}
+	</style>
+	<script>
+		async function getJoke(){
+			let nr = document.querySelector("#nr").value;
+			let options = document.querySelector("#options").value;
+			
+			let url = "https://official-joke-api.appspot.com/jokes/";
+			let optionsMap = {
+				"OneAll":"random",
+				"OneProgramming":"programming/random",
+				"TenAll":"ten",
+				"TenProgramming":"programming/ten"
+			}
+			/*if(nr === "One"){
+				url = "https://official-joke-api.appspot.com/jokes/random";
+				if(options === "Programming"){
+					url = "https://official-joke-api.appspot.com/jokes/programming/random";
+				}
+			} else {
+				url = "https://official-joke-api.appspot.com/jokes/ten";
+				if(options === "Programming"){
+					url = "https://official-joke-api.appspot.com/jokes/programming/ten";
+				}
+			}*/
+			
+			let response = await fetch(url + optionsMap[nr+options]);
+			let json = await response.json();
+			if(nr === "One" && options === "All"){
+				json = [json];
+			}
+			let html = "";
+			for(let joke of json){
+			//for(let i=0;i<json.length;i++){
+			//	let joke = json[i];
+
+				html += `
+				<li class="hidden">
+					<span>${joke.setup}</span>
+					<span class="hidden">${joke.punchline}</span>
+				</li>
+			`
+			}
+			
+			document.querySelector("#jokes").innerHTML = html;
+			nextJoke();
+		}
+		function nextJoke(){
+			document.querySelector("li.hidden").classList.remove("hidden");
+			setTimeout(function(){
+				document.querySelector("span.hidden").classList.remove("hidden");
+			},5000);
+		}
+	</script>
+</head>
+<body >
+	<select id="nr">
+		<option>One</option>
+		<option>Ten</option>
+	</select>
+	<select id="options">
+		<option>All</option>
+		<option>Programming</option>
+	</select>
+	<button onclick="getJoke();">Get Joke</button>
+	<ol id="jokes">
+	</ol>
+	<button onclick="nextJoke();">Next Joke !</button>
+</body>
+</html>
