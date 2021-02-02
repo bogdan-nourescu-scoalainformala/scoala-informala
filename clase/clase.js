@@ -1,3 +1,21 @@
+class GeoPoint{
+	constructor(lat, lng){
+		this.lat= lat;
+		this.lng=lng;
+	}
+	
+	static distance(a,b){
+		return Math.sqrt( Math.pow(a.lat-b.lat, 2) + Math.pow(a.lng-b.lng, 2) );
+	}
+}
+let x = new GeoPoint(47,50);
+let y = new GeoPoint(100,75);
+
+GeoPoint.distance(x,y);
+
+
+
+
 class Nota {
 	constructor(v, p, d){
 		this.valoare = v;
@@ -13,7 +31,7 @@ class Student {
 		this.nume=nume;
 		this.prenume=prenume;
 		this.note = [];
-		this.medie = 0;
+		this._medie = 0;
 	}
 	addNota(nota){
 		this.note.push(nota);
@@ -24,9 +42,34 @@ class Student {
 		for(let i=0;i<this.note.length;i++){
 			m+=this.note.valoare;
 		}
-		this.medie =m/this.note.length;
+		this._medie =m/this.note.length;
 	}
+	
+	get numeComplet(){
+		return this.nume +" "+this.prenume;
+	}
+	set numeComplet(val){
+		this.nume = val.split(" ")[0];
+		this.prenume = val.split(" ")[1];
+		//echivalent cu:
+		[this.nume,this.prenume] = val.split(" ");
+		
+	}
+	get medie(){
+		let m = 0;
+		for(let i=0;i<this.note.length;i++){
+			m+=this.note.valoare;
+		}
+		return m/this.note.length;
+	}
+	
 }
+let bogdan = new Student("Bogdan");
+bogdan.addNota(7)
+bogdan.addNota(10)
+bogdan.addNota(10)
+bogdan.numeComplet = "Bogdan Nourescu";
+bogdan.medie = 5;
 
 class Clasa{
 	constructor(numeleClasei){

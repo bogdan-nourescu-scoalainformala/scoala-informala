@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CRUD</title>
+	<script>
+	
+		function a(){
+			console.log(this);
+		}
+		class Animal{
+			_latra(){
+				let that = this;
+				//setInterval(function(){
+				//	console.log(`cainele ${that.nume} zice ham `);
+				//}, 3000)
+				
+				setInterval(() => {
+					console.log(`cainele ${this.nume} zice ham `);
+				}, 3000)
+			}
+			opresteLatrat(){
+				
+			}
+		}
+		class Caine extend Animal {
+			constructor(nume){
+				this.nume = nume;
+			}
+			opresteLatrat(){
+				console.log("")
+			}
+		}
+		
+		function Caine(nume){
+			this.nume = nume;
+		}
+		Caine.prototype = new Animal();
+		Caine.prototype.latra = function(){
+			let that = this;
+				//setInterval(function(){
+				//	console.log(`cainele ${that.nume} zice ham `);
+				//}, 3000)
+				
+				setInterval(() => {
+					console.log(`cainele ${this.nume} zice ham `);
+				}, 3000)
+		}
+		Caine.prototype.opresteLatrat = function(){
+		}
+		
+		
+		
+		
+		
+		
+
+		let azorel = new Caine("Azorel");
+		let bitza = new Caine("Bitza");
+		let rex = new Caine("Rex");
+		//azorel._latra();
+		
+		[1,3,5,7,9].reduce((p,v)=> p*v, 1);
+		[1,3,5,7,9].reduce((p,v)=> p+v, 0);
+		["Ana","are","mere"].reduce((p,v)=> p+" "+v, "");
+		
+		let arr =[1,3,5,7,9];
+		let p = 1;
+		for(let v of arr){
+			p=p*v;
+		}
+		
+		
+		
+		let arr = [1,3,5,7,9];
+		for(let i=0;i<arr.length;i++){
+			let v = arr[i]
+			//codul tau
+		}
+		arr.forEach( (v,i)=>{
+			//codul tau
+		
+		
+		});
+		
+		
+	</script>
+</head>
+<body >
+	
+</body>
+</html>
+
+
+
+

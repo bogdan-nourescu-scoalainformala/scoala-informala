@@ -43,12 +43,29 @@
 			//	let joke = json[i];
 
 				html += `
+					<li class="hidden">
+						<span>${joke.setup}</span>
+						<span class="hidden">${joke.punchline}</span>
+					</li>
+				`
+			}
+			
+			let html = json.reduce((joke)=>`
 				<li class="hidden">
 					<span>${joke.setup}</span>
 					<span class="hidden">${joke.punchline}</span>
 				</li>
-			`
-			}
+			
+			`,"")
+			
+			let html = json.map((joke)=>`
+				<li class="hidden">
+					<span>${joke.setup}</span>
+					<span class="hidden">${joke.punchline}</span>
+				</li>
+			
+			`).join("")
+			
 			
 			document.querySelector("#jokes").innerHTML = html;
 			nextJoke();
