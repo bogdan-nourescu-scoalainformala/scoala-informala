@@ -58,7 +58,8 @@
 			
 			const response = await fetch(url+".json");
 			lista = await response.json();
-		  
+			
+			
 			document.querySelector("#loading").classList.add("hidden");
 
 			draw();
@@ -87,16 +88,13 @@
 		}*/
 		
 		
-		
-		
-		
-		
 		function draw(){
 			let cuvantCautat = document.querySelector('[name="search"]').value;
 		
 			var str = "";
 			//for(let i=0;i<lista.length;i++){
 			for(let [i,preparat] of Object.entries(lista)){
+				if(preparat===null){continue;}
 				let ingrediente = preparat.ingrediente;
 				let strIngrediente = "";
 				
@@ -111,7 +109,7 @@
 				}
 				if(strIngrediente.includes(cuvantCautat)){
 					str+=`
-						<div class="menu-item">
+						<div id="prep_${i}" class="menu-item">
 							<div class="menu-img">
 								<img src="${poza}" />
 							</div>
