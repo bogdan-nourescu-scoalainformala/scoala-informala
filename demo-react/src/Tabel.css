@@ -1,0 +1,6 @@
+.tabel{
+	border-collapse:collapse;
+}
+.delete, .edit{
+	width:30px;
+}
