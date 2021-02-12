@@ -8,10 +8,8 @@ class Tabel extends Component {
 	constructor(props) {
 		super(props);
 		
-		this.state = {
-			rows: props.rows
-		};
-		console.log(this.state);
+		this.onDelete = props.onDelete;
+		this.onEdit = props.onEdit;
 	  }
 	
     render() {
@@ -26,19 +24,17 @@ class Tabel extends Component {
 					</tr>
 				</thead>
 				<tbody>
-					{this.state.rows.map((inregistrare, index)=>{
-						return (
-							<tr key={index}>
-								<td>{inregistrare.data}</td>
-								<td><a href={inregistrare.link} target="_blank" rel="noreferrer">Link</a></td>
-								<td>{inregistrare.parola}</td>
-								<td>
-									<img className="delete" src={delIcon} alt="delete" />
-									<img className="edit" src={editIcon} alt="edit" />
-								</td>
-							</tr>
-						)
-					})}
+					{this.props.rows.map((inregistrare, index)=>(
+						<tr key={index}>
+							<td>{inregistrare.data}</td>
+							<td><a href={inregistrare.link} target="_blank" rel="noreferrer">Link</a></td>
+							<td>{inregistrare.parola}</td>
+							<td>
+								<img className="delete" src={delIcon} alt="delete" onClick={()=>this.onDelete(index)} />
+								<img className="edit" src={editIcon} alt="edit" onClick={()=>this.onEdit(index)} />
+							</td>
+						</tr>
+					))}
 				</tbody>
 			</table>
         );

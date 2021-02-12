@@ -22,12 +22,6 @@ class Formular extends Component {
 		console.log(linkInput.value, parolaInput.value, dataInput.value,);
 		console.log("merge adaugarea");
 	}
-	editPasul2(){
-		
-	}
-	cancel(){
-		
-	}
     render() {
         return (
             <form onSubmit={this.adaugaHandler} className="hidden" >

@@ -7,17 +7,17 @@ class Formular extends Component {
 		
 		this.state = props.fieldValues;
 		
-		console.log(props, this.state);
-		// create a ref to store the textInput DOM element
+		this.onSalveaza = props.onSalveaza;
 		
-		this.submitHandler = this.submit.bind(this);
 		this.changeHandler = this.change.bind(this);
+		this.submitHandler = this.submit.bind(this);
 	  }
 	
 	
 	submit(event){
 		event.preventDefault();
 		console.log(this.state);
+		this.onSalveaza(this.state);
 	}
 	change(event){
 		let value = event.target.value;
@@ -30,20 +30,20 @@ class Formular extends Component {
 	
 	
     render() {
+		
         return (
             <form onSubmit={this.submitHandler} className="hidden" >
 				<label>
-					Link:<input type="text" name="link" value={this.state.link} onChange={this.changeHandler}/>
+					Link:<input type="text" name="link" value={this.state.link || ""} onChange={this.changeHandler}/>
 				</label><br />
 				<label>
-					Parola:<input type="password" name="parola" value={this.state.parola} onChange={this.changeHandler}/>
+					Parola:<input type="password" name="parola" value={this.state.parola || ""} onChange={this.changeHandler}/>
 				</label><br />
 				<label>
-					data:<input type="date" name="data" value={this.state.data} onChange={this.changeHandler}/>
+					data:<input type="date" name="data" value={this.state.data || ""} onChange={this.changeHandler}/>
 				</label><br />
-				<input id="addBtn" type="submit" value="Adauga"/>
-				<input id="editBtn" type="button" onClick={this.editPasul2} className="hidden" value="Editeaza"/>
-				<input id="cancelBtn" type="button" onClick={this.cancel} value="Cancel"/>
+				<input id="addBtn" type="submit" value="Salveaza"/>
+				<input id="cancelBtn" type="button" onClick={()=>this.props.onCancel()} value="Cancel"/>
 			</form>
         );
     }
