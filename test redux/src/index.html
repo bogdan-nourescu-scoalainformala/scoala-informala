@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Test Redux</title>
+    <script src="https://unpkg.com/@reduxjs/toolkit/dist/redux-toolkit.umd.js"></script>
+    <script>
+        let {configureStore, createSlice, createAsyncThunk, createDraftSafeSelector} = window.RTK;
+
+        const counterSlice = createSlice({
+            name: 'counter',
+            initialState: {
+                value: 0
+            },
+            reducers: {
+                increment: (state, action) => {
+                    state.value += 1
+                },
+                decrement: (state, action) => {
+                    state.value -= 1
+                },
+                incrementByAmount: (state, action) => {
+                    state.value += action.payload
+                }
+            }
+        })
+
+        let {increment, decrement, incrementByAmount} = counterSlice.actions
+
+
+        const cosSlice = createSlice({
+            name: 'cos',
+            initialState: {
+                arr: [],
+            },
+            reducers: {
+                addProduct: (state, action) => {
+                    let {idProdus, cantitate} = action.payload
+                    let cos = state.arr;
+
+                    let found = false;
+                    let newCos = [];
+
+                    for (let produs of cos) {
+                        if (produs.idProdus === idProdus) {
+                            found = true;
+                            newCos.push({
+                                idProdus: produs.idProdus,
+                                cantitate: produs.cantitate + cantitate
+                            });
+                        } else {
+                            newCos.push(produs);
+                        }
+                    }
+                    if (!found) {
+                        newCos.push({
+                            idProdus: idProdus,
+                            cantitate: cantitate
+                        });
+                    }
+                    state.arr = newCos;
+                },
+                increaseQuantity: (state, action) => {
+                    let {idProdus, cantitate} = action.payload;
+                    let cos = state.arr;
+
+                    let newCos = [];
+
+                    for (let produs of cos) {
+                        if (produs.idProdus === idProdus) {
+                            newCos.push({
+                                idProdus: produs.idProdus,
+                                cantitate: produs.cantitate + cantitate
+                            });
+                        } else {
+                            newCos.push(produs);
+                        }
+                    }
+                    state.arr = newCos;
+                },
+                deleleteProduct: (state, action) => {
+                    let {idProdus} = action.payload;
+
+                    state.arr = state.arr.filter(produs => produs.idProdus !== idProdus);
+                }
+            }
+        })
+
+        let {addProduct, increaseQuantity, deleleteProduct} = cosSlice.actions
+
+
+        const url = "https://crud-956c2.europe-west1.firebasedatabase.app/bogdan-nourescu/"
+
+
+        const getLinks = createAsyncThunk(
+            'getLinks',
+            async (arg, thunkAPI) => {
+                const response = await fetch(url + ".json")
+                return await response.json();
+            }
+        );
+        const addLink = createAsyncThunk(
+            'addLink',
+            async (arg, thunkAPI) => {
+                const response = await fetch(this.url + ".json", {
+                    method: "post",
+                    body: JSON.stringify(arg),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                });
+                await response.json();
+            }
+        );
+        const delLink = createAsyncThunk(
+            'delLink',
+            async (arg, thunkAPI) => {
+                const response = await fetch(this.url + arg + ".json", {
+                    method: "delete"
+                });
+                await response.json();
+            }
+        );
+        const editLink = createAsyncThunk(
+            'editLink',
+            async (arg, thunkAPI) => {
+                const response = await fetch(this.url + arg.id + ".json", {
+                    method: "put",
+                    body: JSON.stringify(arg.value),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                });
+                await response.json();
+            }
+        );
+
+
+        const linksSlice = createSlice({
+            name: 'links',
+            initialState: {
+                arr: {},
+                loading: false,
+                error: null
+            },
+            reducers: {
+                // standard reducer logic, with auto-generated action types per reducer
+            },
+            extraReducers: {
+                [getLinks.pending]: (state, action) => {
+                    state.loading = true;
+                },
+                [getLinks.rejected]: (state, action) => {
+                    state.error = action.error.message;
+                    state.loading = false;
+                },
+                [getLinks.fulfilled]: (state, action) => {
+                    state.arr = action.payload;
+                    state.loading = false;
+                }
+            }
+        });
+
+        let key = "prenume"
+        let obj = {
+            [key]:"asadasda"
+        }
+
+        let store = configureStore({
+            reducer: {
+                counter: counterSlice.reducer,
+                links: linksSlice.reducer,
+                cos: cosSlice.reducer
+            }
+        });
+
+        function subscribeTo(selector, callback) {
+            let value = null;
+            store.subscribe(() => {
+                if (value !== selector(store.getState())) {
+                    value = selector(store.getState());
+                    callback(value);
+                }
+            });
+        }
+
+
+        let totalCosSelector = createDraftSafeSelector(
+            (store) => store.cos.arr,
+            (cos) => {
+                let total = 0;
+                for (let produs of cos) {
+                    total += produs.cantitate * 100;
+                }
+                return total;
+            }
+        )
+
+
+        let contorSelector = createDraftSafeSelector(
+            (store) => store.counter.value,
+            (v) => v
+        )
+
+
+        subscribeTo(contorSelector,
+            (counter) => {
+                document.querySelector("#contor").innerText = counter;
+            });
+
+        subscribeTo(totalCosSelector,
+            (total) => {
+                document.querySelector("#cos").innerText = total;
+            });
+
+
+    </script>
+
+
+</head>
+<body>
+<div id="contor"></div>
+
+<div id="cos"></div>
+<button onclick="store.dispatch(increment())">Increment</button>
+<button onclick="store.dispatch(decrement())">Decrement</button>
+<button onclick="store.dispatch(incrementByAmount(5))">Increment by 5</button>
+
+<button onclick="store.dispatch(addProduct({idProdus:5, cantitate:1}))">Add To Cart</button>
+<button onclick="store.dispatch(getLinks())">Get Links</button>
+
+</body>
+</html>
+
