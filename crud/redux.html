@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CRUD</title>
+    <link rel="stylesheet" href="loading.css">
+    <style>
+        .delete, .edit {
+            width: 30px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .lds-ripple div {
+            border-color: red;
+        }
+
+        #loading {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            width: 200px;
+            height: 200px;
+        }
+
+        #error {
+            color: red;
+            font-size: 20px;
+        }
+    </style>
+
+    <script src="https://unpkg.com/@reduxjs/toolkit/dist/redux-toolkit.umd.js"></script>
+
+    <script>
+        let {configureStore, createSlice, createAsyncThunk, createDraftSafeSelector} = window.RTK;
+        const url = "https://crud-956c2.europe-west1.firebasedatabase.app/bogdan-nourescu/"
+
+        const getInregistrari = createAsyncThunk(
+            'getInregistrari',
+            async (arg, thunkAPI) => {
+                const response = await fetch(url + ".json");
+                let inregistrari = await response.json();
+                if (inregistrari === null) {
+                    inregistrari = {};
+                }
+                thunkAPI.dispatch(showTable());
+                return inregistrari;
+            }
+        );
+        const adaugaInregistrare = createAsyncThunk(
+            'adaugaInregistrare',
+            async (arg, thunkAPI) => {
+                await fetch(url + ".json", {
+                    method: "post",
+                    body: JSON.stringify(arg),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                });
+                thunkAPI.dispatch(getInregistrari());
+                return "";
+            }
+        );
+        const editeazaInregistrare = createAsyncThunk(
+            'editeazaInregistrare',
+            async (arg, thunkAPI) => {
+                let idx = thunkAPI.getState().indexEditare
+                await fetch(url + idx + ".json", {
+                    method: "put",
+                    body: JSON.stringify(arg),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                });
+                thunkAPI.dispatch(getInregistrari());
+                thunkAPI.dispatch(resetIndex());
+                return "";
+            }
+        );
+        const deleteInregistrare = createAsyncThunk(
+            'deleteInregistrare',
+            async (arg, thunkAPI) => {
+                const response = await fetch(url + arg.idx + ".json", {
+                    method: "delete"
+                });
+                await response.json();
+                thunkAPI.dispatch(getInregistrari());
+                return "";
+            }
+        );
+
+
+        const inregistrariSlice = createSlice({
+            name: 'inregistrari',
+            initialState: {
+                arr: {},
+                loadingGet: false,
+                loadingPost: false,
+                loadingPut: false,
+                loadingDelete: false,
+                error: null
+            },
+            reducers: {
+                hideError: (state, action) => {
+                    state.error = null;
+                }
+            },
+            extraReducers: {
+                [getInregistrari.pending]: (state, action) => {
+                    state.loadingGet = true;
+                },
+                [getInregistrari.rejected]: (state, action) => {
+                    state.error = action.error.message;
+                    state.loadingGet = false;
+                },
+                [getInregistrari.fulfilled]: (state, action) => {
+                    state.arr = action.payload;
+                    state.loadingGet = false;
+                    state.error = null;
+                },
+
+
+                [deleteInregistrare.pending]: (state, action) => {
+                    state.loadingDelete = true;
+                },
+                [deleteInregistrare.rejected]: (state, action) => {
+                    state.error = action.error.message;
+                    state.loadingDelete = false;
+                },
+                [deleteInregistrare.fulfilled]: (state, action) => {
+                    state.loadingDelete = false;
+                    state.error = null;
+                },
+
+                [adaugaInregistrare.pending]: (state, action) => {
+                    state.loadingPost = true;
+                },
+                [adaugaInregistrare.rejected]: (state, action) => {
+                    state.error = action.error.message;
+                    state.loadingPost = false;
+                },
+                [adaugaInregistrare.fulfilled]: (state, action) => {
+                    state.loadingPost = false;
+                    state.error = null;
+                },
+                [editeazaInregistrare.pending]: (state, action) => {
+                    state.loadingPut = true;
+                },
+                [editeazaInregistrare.rejected]: (state, action) => {
+                    state.error = action.error.message;
+                    state.loadingPut = false;
+                },
+                [editeazaInregistrare.fulfilled]: (state, action) => {
+                    state.loadingPut = false;
+                    state.error = null;
+                }
+            }
+        });
+        let {hideError} = inregistrariSlice.actions;
+
+        const pageSlice = createSlice({
+            name: 'page',
+            initialState: "table",
+            reducers: {
+                showTable: (state, action) => {
+                    return "table"
+                },
+                showForm: (state, action) => {
+                    return "form"
+                },
+            },
+            extraReducers: {}
+        });
+        const {showTable, showForm} = pageSlice.actions;
+
+
+        const indexEditareSlice = createSlice({
+            name: 'indexEditare',
+            initialState: -1,
+            reducers: {
+                setIndex: (state, action) => {
+                    return action.payload;
+                },
+                resetIndex: (state, action) => {
+                    return -1
+                },
+            }
+        });
+        const {setIndex, resetIndex} = indexEditareSlice.actions;
+
+
+        let store = configureStore({
+            reducer: {
+                inregistrari: inregistrariSlice.reducer,
+                page: pageSlice.reducer,
+                indexEditare: indexEditareSlice.reducer
+            }
+        });
+
+        function subscribeTo(selector, callback) {
+            let value = null;
+            store.subscribe(() => {
+                if (value !== selector(store.getState())) {
+                    value = selector(store.getState());
+                    callback(value);
+                }
+            });
+        }
+
+        let pageSelector = createDraftSafeSelector(
+            (store) => store.page,
+            (v) => v
+        )
+        subscribeTo(pageSelector,
+            (page) => {
+                if (page === "form") {
+                    document.querySelector("form").classList.remove("hidden");
+                    document.querySelector("#zoom").classList.add("hidden");
+                    document.querySelector("#plusBtn").classList.add("hidden");
+                } else {
+                    document.querySelector("form").classList.add("hidden");
+                    document.querySelector("#zoom").classList.remove("hidden");
+                    document.querySelector("#plusBtn").classList.remove("hidden");
+                }
+            });
+
+        let indexEditareSelector = createDraftSafeSelector(
+            (store) => store.indexEditare,
+            (v) => v
+        )
+        subscribeTo(indexEditareSelector,
+            (indexEditare) => {
+                if (indexEditare === -1) {
+                    document.querySelector("#editBtn").classList.add("hidden");
+                    document.querySelector("#addBtn").classList.remove("hidden");
+                } else {
+                    document.querySelector("#editBtn").classList.remove("hidden");
+                    document.querySelector("#addBtn").classList.add("hidden");
+                }
+            });
+
+
+        let formSelector = createDraftSafeSelector(
+            (store) => store.indexEditare,
+            (store) => store.inregistrari.arr,
+            (indexEditare, inregistrari) => ({indexEditare, inregistrari})
+        )
+        subscribeTo(formSelector,
+            ({indexEditare, inregistrari}) => {
+                if (indexEditare === -1) {
+                    document.querySelector("form").reset();
+                } else {
+                    let inregistrare = inregistrari[indexEditare];
+                    document.querySelector("[name='link']").value = inregistrare.link;
+                    document.querySelector("[name='parola']").value = inregistrare.parola;
+                    document.querySelector("[name='data']").value = inregistrare.data;
+                }
+            });
+
+        let inregistrariSelector = createDraftSafeSelector(
+            (store) => store.inregistrari.arr,
+            (v) => v
+        )
+        subscribeTo(inregistrariSelector, draw);
+
+        let loadingSelector = createDraftSafeSelector(
+            (store) => store.inregistrari.loadingGet,
+            (store) => store.inregistrari.loadingPost,
+            (store) => store.inregistrari.loadingDelete,
+            (store) => store.inregistrari.loadingPut,
+            (loadingGet, loadingPost, loadingDelete, loadingPut) => loadingGet || loadingPost || loadingDelete || loadingPut
+        )
+        subscribeTo(loadingSelector, (loading) => {
+            if (loading) {
+                document.querySelector("#loading").classList.remove("hidden");
+            } else {
+                document.querySelector("#loading").classList.add("hidden");
+            }
+        });
+
+        let errorSelector = createDraftSafeSelector(
+            (store) => store.inregistrari.error,
+            (error) => error
+        )
+        subscribeTo(errorSelector, (error) => {
+            if (error) {
+                document.querySelector("#error").classList.remove("hidden");
+                document.querySelector("#error").innerText = error;
+                setTimeout(() => {
+                    store.dispatch(hideError());
+                }, 5000)
+            } else {
+                document.querySelector("#error").classList.add("hidden");
+            }
+        });
+
+
+        function getHtml(lista) {
+            let str = "";
+            for (let [id, inregistrare] of Object.entries(lista)) {
+                str += `
+					<tr>
+						<td>${inregistrare.data}</td>
+						<td><a href="${inregistrare.link}" target="_blank">Link</a></td>
+						<td>${inregistrare.parola}</td>
+						<td>
+							<img class="delete" src="icons/icon-delete-16.jpg" onclick="del('${id}');" />
+							<img class="edit" src="icons/edit.png" onclick="edit('${id}');" />
+						</td>
+					</tr>
+				`
+            }
+            return str;
+        }
+
+        function draw(inregistrari) {
+            let str = getHtml(inregistrari);
+            document.querySelector("#zoom tbody").innerHTML = str;
+        }
+
+        /**
+         Preia informatiile din array si le populeaza in Formular.
+         */
+        function edit(idx) {
+            store.dispatch(setIndex(idx));
+            store.dispatch(showForm());
+        }
+
+        /**
+         Preia informatiile formular si le actualizeaza in array;
+         */
+        async function editPasul2() {
+            store.dispatch(editeazaInregistrare({
+                link: document.querySelector("[name='link']").value,
+                parola: document.querySelector("[name='parola']").value,
+                data: document.querySelector("[name='data']").value,
+            }));
+        }
+
+        function cancel() {
+            store.dispatch(resetIndex());
+            store.dispatch(showTable());
+        }
+
+        async function del(idx) {
+            let inregistrari = store.getState().inregistrari.arr;
+            if (confirm(`Esti sigur ca vrei sa stergi inregistrarea de la data de ${inregistrari[idx].data} ?`)) {
+                store.dispatch(deleteInregistrare({idx}))
+            }
+        }
+
+        async function adauga() {
+            let link = document.querySelector("[name='link']").value;
+            let parola = document.querySelector("[name='parola']").value;
+            let data = document.querySelector("[name='data']").value;
+            store.dispatch(adaugaInregistrare({link, parola, data}));
+        }
+
+
+        function onLoad() {
+            store.dispatch(getInregistrari());
+        }
+
+    </script>
+</head>
+<body onload="onLoad()">
+<div id="loading" class="lds-ripple">
+    <div></div>
+    <div></div>
+</div>
+<div id="error" class="hidden"></div>
+<form onsubmit="event.preventDefault();adauga();" class="hidden">
+    <label>
+        Link:<input type="text" name="link"/>
+    </label><br/>
+    <label>
+        Parola:<input type="password" name="parola"/>
+    </label><br/>
+    <label>
+        data:<input type="date" name="data"/>
+    </label><br/>
+    <input id="addBtn" type="submit" value="Adauga"/>
+    <input id="editBtn" type="button" onclick="editPasul2();" class="hidden" value="Editeaza"/>
+    <input id="cancelBtn" type="button" onclick="cancel();" value="Cancel"/>
+</form>
+<input id="plusBtn" type="button" value="+" onclick="store.dispatch(showForm());"/>
+<table id="zoom" border="1" style="border-collapse:collapse;">
+    <thead>
+    <tr>
+        <th>Data</th>
+        <th>Link</th>
+        <th>Parola</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+</body>
+</html>
