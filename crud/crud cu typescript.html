@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CRUD</title>
+	<style>
+		.delete, .edit{
+			width:30px;
+		}
+		.hidden{
+			display:none !important;
+		}
+	</style>
+	<script src="crud.js"></script>
+</head>
+<body onload="getInregistrari();">
+	<form onsubmit="event.preventDefault();adauga();" class="hidden" >
+		<label>
+			Link:<input type="text" name="link"/>
+		</label><br />
+		<label>
+			Parola:<input type="password" name="parola"/>
+		</label><br />
+		<label>
+			data:<input type="date" name="data"/>
+		</label><br />
+		<input id="addBtn" type="submit" value="Adauga"/>
+		<input id="editBtn" type="button" onclick="editPasul2();" class="hidden" value="Editeaza"/>
+		<input id="cancelBtn" type="button" onclick="cancel();" value="Cancel"/>
+	</form>
+	<input id="plusBtn" type="button" value="+" onclick="showForm();"/>
+	<table id="zoom" border="1" style="border-collapse:collapse;">
+		<thead>
+			<tr>
+				<th>Data</th>
+				<th>Link</th>
+				<th>Parola</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+</body>
+</html>

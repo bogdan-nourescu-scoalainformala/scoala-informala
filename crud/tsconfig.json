@@ -1,0 +1,16 @@
+{
+  "files": ["crud.ts"],
+  "compilerOptions": {
+    "baseUrl": "",
+    "outDir": "./",
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "sourceMap": true,
+    "module": "esnext",
+    "target": "ES2018",
+    "moduleResolution": "node",
+    "jsx": "preserve",
+    "allowJs": false
+  }
+}
